@@ -14,11 +14,23 @@ import org.springframework.stereotype.Component;
 import com.offretechnical.test.models.User;
 import com.offretechnical.test.models.dtos.UserDto;
 
+/**
+ * Aop Logging input , output and Time Taken of services
+ * 
+ * @author bn
+ *
+ */
 @Aspect
 @Component
 public class LoggingAspect {
 	private static final Logger LOGGER = LogManager.getLogger(LoggingAspect.class);
 
+	/**
+	 * Time Taken by Service
+	 * 
+	 * @param joinPoint
+	 * @throws Throwable
+	 */
 	@Around("execution(* com.offretechnical.test.controllers..*(..)))")
 	public void around(ProceedingJoinPoint joinPoint) throws Throwable {
 		long startTime = System.currentTimeMillis();
@@ -27,16 +39,27 @@ public class LoggingAspect {
 		LOGGER.info("Time Taken by {} is {}", joinPoint, timeTaken);
 	}
 
+	/**
+	 * Service 's , return Value
+	 * 
+	 * @param joinPoint
+	 * @param result
+	 */
 	@SuppressWarnings("unchecked")
 	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.*.*(..))", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
 		User user = ((ResponseEntity<User>) result).getBody();
-		LOGGER.info("{} returned with value {}", joinPoint,user!= null ? user.toString():"");
+		LOGGER.info("{} returned with value {}", joinPoint, user != null ? user.toString() : "");
 	}
 
+	/**
+	 * Service 's , Input Data 
+	 * 
+	 * @param joinPoint
+	 */
 	@Before("execution(* com.offretechnical.test.controllers.*.*(..))")
 	public void before(JoinPoint joinPoint) {
 		UserDto user = (UserDto) joinPoint.getArgs()[0];
-		LOGGER.info("{} Input execution for {}", joinPoint,user!= null ? user.toString():"");
+		LOGGER.info("{} Input execution for {}", joinPoint, user != null ? user.toString() : "");
 	}
 }

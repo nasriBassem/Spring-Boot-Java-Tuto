@@ -9,7 +9,7 @@ import com.offretechnical.test.constraints.BirthDate;
 import com.offretechnical.test.constraints.Country;
 
 /**
- * Dto des users
+ * users s' dto
  * 
  * @author bn
  *
@@ -117,8 +117,8 @@ public class UserDto {
 
 	@Override
 	public String toString() {
-		return "UserDto [ birthdate=" + birthdate + ", userName=" + userName + ", country=" + country
-				+ ", phoneNumber=" + phoneNumber + ", gender=" + gender + "]";
+		return "UserDto [ birthdate=" + birthdate + ", userName=" + userName + ", country=" + country + ", phoneNumber="
+				+ phoneNumber + ", gender=" + gender + "]";
 	}
-	
+
 }

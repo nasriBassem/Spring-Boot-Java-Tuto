@@ -11,7 +11,12 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-
+/**
+ * Date of birth validation annotation
+ * 
+ * @author bn
+ *
+ */
 @Constraint(validatedBy = BirthDateValidator.class)
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)

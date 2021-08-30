@@ -22,7 +22,7 @@ import com.offretechnical.test.models.User;
 import com.offretechnical.test.models.dtos.UserDto;
 
 /**
- * Controleur des deux services demandés
+ * Controller of the two requested services
  * 
  * @author bn
  *

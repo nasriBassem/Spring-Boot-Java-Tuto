@@ -12,6 +12,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * Country validation annotation
+ * 
+ * @author bn
+ *
+ */
 @Constraint(validatedBy = CountryValidator.class)
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
