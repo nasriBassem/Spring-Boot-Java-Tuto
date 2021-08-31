@@ -59,19 +59,20 @@ public class UserController {
 			 */
 			if (users.isEmpty()) {
 				logger.info("Liste des users vide");
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		        return ResponseEntity.noContent().build();
 			}
 			/**
 			 * if liste pas vide , return la liste avec un code http 200
 			 */
 			logger.info("Le nombre des users : {}", users.size());
-			return new ResponseEntity<>(users, HttpStatus.OK);
+			return ResponseEntity.ok().body(users);
+
 		} catch (Exception e) {
 			/**
 			 * Return Error 500 , en k d'erreur
 			 */
 			logger.error(e.getMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	        return ResponseEntity.internalServerError().build();
 		}
 	}
 
@@ -91,9 +92,8 @@ public class UserController {
 				user.getPhoneNumber(), user.getGender()));
 
 		/**
-		 * Réponse HTTP 201 , user crée
+		 * Réponse HTTP 200 , user crée
 		 */
-		return new ResponseEntity<>(userCreated, HttpStatus.CREATED);
-
+		return ResponseEntity.ok().body(userCreated);
 	}
 }

@@ -49,8 +49,8 @@ public class LoggingAspect {
 	 */
 	@SuppressWarnings("unchecked")
 	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.UserController.createUser(..))", returning = "result")
-	public void afterReturningCreateUser(JoinPoint joinPoint, Object result) {
-		User user = ((ResponseEntity<User>) result).getBody();
+	public void afterReturningCreateUser(JoinPoint joinPoint, ResponseEntity<User> result) {
+		User user = result.getBody();
 		LOGGER.info("{} returned with value {}", joinPoint, user != null ? user.toString() : "");
 	}
 
@@ -60,10 +60,9 @@ public class LoggingAspect {
 	 * @param joinPoint
 	 * @param result
 	 */
-	@SuppressWarnings("unchecked")
 	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.UserController.getAllUsers(..))", returning = "result")
-	public void afterReturningGetAll(JoinPoint joinPoint, Object result) {
-		List<User> users = (List<User>) result;
+	public void afterReturningGetAll(JoinPoint joinPoint, ResponseEntity<List<User>> result) {
+		List<User> users = result.getBody();
 		LOGGER.info("{} returned with value {}", joinPoint, users != null ? users.toString() : "");
 	}
 
