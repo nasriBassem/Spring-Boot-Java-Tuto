@@ -1,5 +1,5 @@
 # Spring-Boot-Java-Tuto
-Registration and get users example with Spring Spring Boot, H2 , Junit ..
+User Registration example with Spring Boot, H2 , Junit ..
 
 ## Things to do
 1. Clone this repository:
