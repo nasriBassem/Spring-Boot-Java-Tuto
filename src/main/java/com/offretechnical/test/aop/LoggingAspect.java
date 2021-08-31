@@ -1,5 +1,7 @@
 package com.offretechnical.test.aop;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -46,18 +48,31 @@ public class LoggingAspect {
 	 * @param result
 	 */
 	@SuppressWarnings("unchecked")
-	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.*.*(..))", returning = "result")
-	public void afterReturning(JoinPoint joinPoint, Object result) {
+	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.UserController.createUser(..))", returning = "result")
+	public void afterReturningCreateUser(JoinPoint joinPoint, Object result) {
 		User user = ((ResponseEntity<User>) result).getBody();
 		LOGGER.info("{} returned with value {}", joinPoint, user != null ? user.toString() : "");
 	}
 
 	/**
-	 * Service 's , Input Data 
+	 * Service 's , return Value
+	 * 
+	 * @param joinPoint
+	 * @param result
+	 */
+	@SuppressWarnings("unchecked")
+	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.UserController.getAllUsers(..))", returning = "result")
+	public void afterReturningGetAll(JoinPoint joinPoint, Object result) {
+		List<User> users = (List<User>) result;
+		LOGGER.info("{} returned with value {}", joinPoint, users != null ? users.toString() : "");
+	}
+
+	/**
+	 * Service 's , Input Data
 	 * 
 	 * @param joinPoint
 	 */
-	@Before("execution(* com.offretechnical.test.controllers.*.*(..))")
+	@Before("execution(* com.offretechnical.test.controllers.UserController.createUser(..))")
 	public void before(JoinPoint joinPoint) {
 		UserDto user = (UserDto) joinPoint.getArgs()[0];
 		LOGGER.info("{} Input execution for {}", joinPoint, user != null ? user.toString() : "");
