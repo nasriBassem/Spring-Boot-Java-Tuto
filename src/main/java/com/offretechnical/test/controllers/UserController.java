@@ -93,7 +93,7 @@ public class UserController {
 		/**
 		 * Réponse HTTP 201 , user crée
 		 */
-		return new ResponseEntity<>(userCreated, HttpStatus.OK);
+		return new ResponseEntity<>(userCreated, HttpStatus.CREATED);
 
 	}
 }
