@@ -1,11 +1,19 @@
 # Spring-Boot-Java-Tuto
+Registration and get users example with Spring Spring Boot, H2 , Junit ..
 
-Registration and Login Example with Spring Security, Spring Boot, Spring Data JPA & HSQL
+## Things to do
+1. Clone this repository:
+    ```
+    git clone https://github.com/nasriBassem/Spring-Boot-Java-Tuto.git
+    ```
+2. Go to your folder:
+    ```
+    cd Spring-Boot-Java-Tuto-main
+    ```
+3. Run the application by this command:
+    ```
+    mvn clean spring-boot:run
+    ```
 
-Things to do
-Clone this repository:
-git clone https://github.com/nasriBassem/Spring-Boot-Java-Tuto.git
-Go to your folder:
-cd Spring-Boot-Java-Tuto
-Run the application by this command:
+## Screen shot
 
