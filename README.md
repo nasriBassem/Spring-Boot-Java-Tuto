@@ -8,7 +8,7 @@ User Registration example with Spring Boot, H2 , Junit ..
     ```
 2. Go to your folder:
     ```
-    cd Spring-Boot-Java-Tuto-main
+    cd Spring-Boot-Java-Tuto
     ```
 3. Run the application by this command:
     ```
