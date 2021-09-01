@@ -115,6 +115,24 @@ public class UserDto {
 		this.gender = gender;
 	}
 
+	/**
+	 * @param birthdate
+	 * @param userName
+	 * @param country
+	 * @param phoneNumber
+	 * @param gender
+	 */
+	public UserDto(@NotNull(message = "User birthdate must not be empty") Date birthdate,
+			@NotEmpty(message = "User name must not be empty") String userName,
+			@NotEmpty(message = "User country must not be empty") String country, String phoneNumber, String gender) {
+		super();
+		this.birthdate = birthdate;
+		this.userName = userName;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDto [ birthdate=" + birthdate + ", userName=" + userName + ", country=" + country + ", phoneNumber="

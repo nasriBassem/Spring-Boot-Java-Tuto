@@ -10,8 +10,10 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 import com.offretechnical.test.models.User;
 import com.offretechnical.test.models.dtos.UserDto;
@@ -26,20 +28,6 @@ import com.offretechnical.test.models.dtos.UserDto;
 @Component
 public class LoggingAspect {
 	private static final Logger LOGGER = LogManager.getLogger(LoggingAspect.class);
-
-	/**
-	 * Time Taken by Service
-	 * 
-	 * @param joinPoint
-	 * @throws Throwable
-	 */
-	@Around("execution(* com.offretechnical.test.controllers..*(..)))")
-	public void around(ProceedingJoinPoint joinPoint) throws Throwable {
-		long startTime = System.currentTimeMillis();
-		joinPoint.proceed();
-		long timeTaken = System.currentTimeMillis() - startTime;
-		LOGGER.info("Time Taken by {} is {}", joinPoint, timeTaken);
-	}
 
 	/**
 	 * Service 's , return Value
@@ -76,4 +64,21 @@ public class LoggingAspect {
 		UserDto user = (UserDto) joinPoint.getArgs()[0];
 		LOGGER.info("{} Input execution for {}", joinPoint, user != null ? user.toString() : "");
 	}
+
+	/**
+	 * method Time Logger
+	 * 
+	 * @param proceedingJoinPoint
+	 * @throws Throwable
+	 */
+	@Around("@annotation(com.offretechnical.test.aop.LogExecutionTime)")
+	public void methodTimeLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+		StopWatch stopWatch = new StopWatch(
+				methodSignature.getDeclaringType().getSimpleName() + "->" + methodSignature.getName());
+		stopWatch.start(methodSignature.getName());
+		proceedingJoinPoint.proceed();
+		stopWatch.stop();
+	}
+
 }

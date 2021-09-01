@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.offretechnical.test.aop.LogExecutionTime;
 import com.offretechnical.test.daos.UserRepository;
 import com.offretechnical.test.models.User;
 import com.offretechnical.test.models.dtos.UserDto;
@@ -43,6 +44,7 @@ public class UserController {
 	 * @return ResponseEntity<List<User>>
 	 */
 	@GetMapping("/users")
+	@LogExecutionTime
 	public ResponseEntity<List<User>> getAllUsers() {
 		try {
 			/**
@@ -59,20 +61,19 @@ public class UserController {
 			 */
 			if (users.isEmpty()) {
 				logger.info("Liste des users vide");
-		        return ResponseEntity.noContent().build();
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 			/**
 			 * if liste pas vide , return la liste avec un code http 200
 			 */
 			logger.info("Le nombre des users : {}", users.size());
-			return ResponseEntity.ok().body(users);
-
+			return new ResponseEntity<>(users, HttpStatus.OK);
 		} catch (Exception e) {
 			/**
 			 * Return Error 500 , en k d'erreur
 			 */
 			logger.error(e.getMessage());
-	        return ResponseEntity.internalServerError().build();
+			return ResponseEntity.internalServerError().build();
 		}
 	}
 
@@ -83,7 +84,8 @@ public class UserController {
 	 * 
 	 * @return ResponseEntity<User>
 	 */
-	@PostMapping("/userCreate")
+	@PostMapping("/users")
+	@LogExecutionTime
 	public ResponseEntity<User> createUser(@Valid @RequestBody UserDto user) {
 		/**
 		 * Enregistrement d'user

@@ -34,7 +34,7 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void createUserNotAdult() throws Exception {
-		String uri = "/api/userCreate";
+		String uri = "/api/users";
 		User user = new User();
 		user.setCountry("France");
 		user.setUserName("userName");
@@ -59,7 +59,7 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void createUserNotFrench() throws Exception {
-		String uri = "/api/userCreate";
+		String uri = "/api/users";
 		User user = new User();
 		user.setCountry("Tunisie");
 		user.setUserName("userName");
@@ -88,7 +88,7 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void createUserWithSuccess() throws Exception {
-		String uri = "/api/userCreate";
+		String uri = "/api/users";
 		User user = new User();
 		user.setCountry("France");
 		user.setUserName("userName");
