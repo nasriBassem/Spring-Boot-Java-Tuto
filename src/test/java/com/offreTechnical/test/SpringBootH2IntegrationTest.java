@@ -22,6 +22,13 @@ import com.offretechnical.test.models.User;
 @SpringBootTest(classes = SpringBootApplicationRunner.class)
 public class SpringBootH2IntegrationTest extends AbstractTest {
 
+	/**
+	 * Constante des Strings
+	 */
+	private static final String FRANCE = "France";
+	private static final String REST_URL = "/api/users";
+	private static final String USER_NAME = "userName";
+
 	@Before
 	public void setUp() {
 		super.setUp();
@@ -34,16 +41,15 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void createUserNotAdult() throws Exception {
-		String uri = "/api/users";
 		User user = new User();
-		user.setCountry("France");
-		user.setUserName("userName");
+		user.setCountry(FRANCE);
+		user.setUserName(USER_NAME);
 		user.setBirthdate(new Date());
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String inputJson = objectMapper.writeValueAsString(user);
 		MvcResult mvcResult = mvc.perform(
-				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
+				MockMvcRequestBuilders.post(REST_URL).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
@@ -59,10 +65,8 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void createUserNotFrench() throws Exception {
-		String uri = "/api/users";
 		User user = new User();
-		user.setCountry("Tunisie");
-		user.setUserName("userName");
+		user.setCountry("TUNISIE");
 
 		Date date = new Date();
 		date.setYear(0);
@@ -71,7 +75,7 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String inputJson = objectMapper.writeValueAsString(user);
 		MvcResult mvcResult = mvc.perform(
-				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
+				MockMvcRequestBuilders.post(REST_URL).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
@@ -82,16 +86,14 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 	}
 
 	/**
-	 * Create User With Success
+	 * create noy nammed user , and check return status
 	 * 
 	 * @throws Exception
 	 */
 	@Test
-	public void createUserWithSuccess() throws Exception {
-		String uri = "/api/users";
+	public void createUserNotNamed() throws Exception {
 		User user = new User();
-		user.setCountry("France");
-		user.setUserName("userName");
+		user.setCountry(FRANCE);
 		Date date = new Date();
 		date.setYear(0);
 		user.setBirthdate(date);
@@ -99,7 +101,34 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String inputJson = objectMapper.writeValueAsString(user);
 		MvcResult mvcResult = mvc.perform(
-				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
+				MockMvcRequestBuilders.post(REST_URL).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(400, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		assertTrue(content.contains("User name must not be empty"));
+
+	}
+
+	/**
+	 * Create User With Success
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void createUserWithSuccess() throws Exception {
+		User user = new User();
+		user.setCountry(FRANCE);
+		user.setUserName(USER_NAME);
+		Date date = new Date();
+		date.setYear(0);
+		user.setBirthdate(date);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String inputJson = objectMapper.writeValueAsString(user);
+		MvcResult mvcResult = mvc.perform(
+				MockMvcRequestBuilders.post(REST_URL).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
