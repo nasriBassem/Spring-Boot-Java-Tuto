@@ -35,7 +35,6 @@ public class LoggingAspect {
 	 * @param joinPoint
 	 * @param result
 	 */
-	@SuppressWarnings("unchecked")
 	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.UserController.createUser(..))", returning = "result")
 	public void afterReturningCreateUser(JoinPoint joinPoint, ResponseEntity<User> result) {
 		User user = result.getBody();
