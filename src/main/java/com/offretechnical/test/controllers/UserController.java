@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.offretechnical.test.aop.LogExecutionTime;
+import com.offretechnical.test.aop.annotation.LogExecutionTime;
 import com.offretechnical.test.daos.UserRepository;
 import com.offretechnical.test.models.User;
 import com.offretechnical.test.models.dtos.UserDto;

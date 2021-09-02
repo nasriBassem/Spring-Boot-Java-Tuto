@@ -38,7 +38,7 @@ public class LoggingAspect {
 	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.UserController.createUser(..))", returning = "result")
 	public void afterReturningCreateUser(JoinPoint joinPoint, ResponseEntity<User> result) {
 		User user = result.getBody();
-		LOGGER.info("{} returned with value {}", joinPoint, user != null ? user.toString() : "");
+		LOGGER.info("{} returned with value {}", joinPoint, user != null ? user.toString() : "Empty . ");
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class LoggingAspect {
 	@AfterReturning(value = "execution(* com.offretechnical.test.controllers.UserController.getAllUsers(..))", returning = "result")
 	public void afterReturningGetAll(JoinPoint joinPoint, ResponseEntity<List<User>> result) {
 		List<User> users = result.getBody();
-		LOGGER.info("{} returned with value {}", joinPoint, users != null ? users.toString() : "");
+		LOGGER.info("{} returned with value {}", joinPoint, users != null ? users.toString() : "Empty . ");
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class LoggingAspect {
 	@Before("execution(* com.offretechnical.test.controllers.UserController.createUser(..))")
 	public void before(JoinPoint joinPoint) {
 		UserDto user = (UserDto) joinPoint.getArgs()[0];
-		LOGGER.info("{} Input execution for {}", joinPoint, user != null ? user.toString() : "");
+		LOGGER.info("{} Input execution for {}", joinPoint, user != null ? user.toString() : "Empty . ");
 	}
 
 	/**
@@ -70,14 +70,18 @@ public class LoggingAspect {
 	 * @param proceedingJoinPoint
 	 * @throws Throwable
 	 */
-	@Around("@annotation(com.offretechnical.test.aop.LogExecutionTime)")
-	public void methodTimeLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+	@Around("@annotation(com.offretechnical.test.aop.annotation.LogExecutionTime)")
+	public Object methodTimeLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
 		StopWatch stopWatch = new StopWatch(
 				methodSignature.getDeclaringType().getSimpleName() + "->" + methodSignature.getName());
 		stopWatch.start(methodSignature.getName());
-		proceedingJoinPoint.proceed();
+		Object result = proceedingJoinPoint.proceed();
 		stopWatch.stop();
+		LOGGER.info("StopWatch : {}, running time : {} ns",
+				methodSignature.getDeclaringType().getSimpleName() + "->" + methodSignature.getName(),
+				stopWatch.getTotalTimeNanos());
+		return result;
 	}
 
 }

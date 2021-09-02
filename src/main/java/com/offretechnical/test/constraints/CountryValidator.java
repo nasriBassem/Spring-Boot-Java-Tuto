@@ -10,11 +10,14 @@ import javax.validation.ConstraintValidatorContext;
  *
  */
 public class CountryValidator implements ConstraintValidator<Country, String> {
+
+	public static final String FRANCE = "France";
+
 	/**
 	 * check if the person lives in France
 	 */
 	@Override
 	public boolean isValid(final String valueToValidate, final ConstraintValidatorContext context) {
-		return "France".equalsIgnoreCase(valueToValidate);
+		return FRANCE.equalsIgnoreCase(valueToValidate);
 	}
 }
