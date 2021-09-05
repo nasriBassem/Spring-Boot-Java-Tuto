@@ -8,6 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Constraint;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.offretechnical.test.constraints.BirthDate;
+import com.offretechnical.test.constraints.Country;
 
 /**
  * Modéle des users
@@ -24,12 +30,17 @@ public class User {
 	private int id;
 
 	@Column(nullable = false)
+	@NotNull(message = "User birthdate must not be empty")
+	@BirthDate
 	private Date birthdate;
 
 	@Column(nullable = false)
+	@NotEmpty(message = "User name must not be empty")
 	private String userName;
 
 	@Column(nullable = false)
+	@NotEmpty(message = "User country must not be empty")
+	@Country
 	private String country;
 
 	private String phoneNumber;

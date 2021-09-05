@@ -3,13 +3,12 @@ package com.offretechnical.test.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.offretechnical.test.aop.annotation.LogExecutionTime;
 import com.offretechnical.test.daos.UserRepository;
 import com.offretechnical.test.models.User;
-import com.offretechnical.test.models.dtos.UserDto;
 
 /**
  * Controller of the two requested services
@@ -86,7 +84,7 @@ public class UserController {
 	 */
 	@PostMapping("/users")
 	@LogExecutionTime
-	public ResponseEntity<User> createUser(@Valid @RequestBody UserDto user) {
+	public ResponseEntity<User> createUser(@Validated @RequestBody User user) {
 		/**
 		 * Enregistrement d'user
 		 */
@@ -94,8 +92,8 @@ public class UserController {
 				user.getPhoneNumber(), user.getGender()));
 
 		/**
-		 * Réponse HTTP 200 , user crée
+		 * Réponse HTTP 201 , user crée
 		 */
-		return ResponseEntity.ok().body(userCreated);
+		return new ResponseEntity<>(userCreated, HttpStatus.CREATED);
 	}
 }

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import com.offretechnical.test.models.User;
-import com.offretechnical.test.models.dtos.UserDto;
 
 /**
  * Aop Logging input , output and Time Taken of services
@@ -60,7 +59,7 @@ public class LoggingAspect {
 	 */
 	@Before("execution(* com.offretechnical.test.controllers.UserController.createUser(..))")
 	public void before(JoinPoint joinPoint) {
-		UserDto user = (UserDto) joinPoint.getArgs()[0];
+		User user = (User) joinPoint.getArgs()[0];
 		LOGGER.info("{} Input execution for {}", joinPoint, user != null ? user.toString() : "Empty . ");
 	}
 
