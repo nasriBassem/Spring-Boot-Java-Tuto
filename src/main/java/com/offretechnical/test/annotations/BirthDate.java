@@ -1,4 +1,4 @@
-package com.offretechnical.test.constraints;
+package com.offretechnical.test.annotations;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;
@@ -12,19 +12,20 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import com.offretechnical.test.constraints.BirthDateValidator;
 /**
- * Country validation annotation
+ * Date of birth validation annotation
  * 
  * @author bn
  *
  */
-@Constraint(validatedBy = CountryValidator.class)
+@Constraint(validatedBy = BirthDateValidator.class)
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 @Documented
-public @interface Country {
+public @interface BirthDate {
 
-	String message() default "Only French residents are allowed to create an account!";
+	String message() default "Only adult are allowed to create an account!";
 
 	Class<?>[] groups() default {};
 

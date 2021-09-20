@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.offretechnical.test.constraints.BirthDate;
-import com.offretechnical.test.constraints.Country;
+import com.offretechnical.test.annotations.BirthDate;
+import com.offretechnical.test.annotations.Country;
 
 /**
  * Modéle des users

@@ -3,6 +3,8 @@ package com.offretechnical.test.constraints;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import com.offretechnical.test.annotations.Country;
+
 /**
  * Country validator
  * 

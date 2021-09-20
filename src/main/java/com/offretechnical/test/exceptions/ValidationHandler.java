@@ -1,4 +1,4 @@
-package com.offretechnical.test.exception;
+package com.offretechnical.test.exceptions;
 
 import java.util.HashMap;
 import java.util.Map;

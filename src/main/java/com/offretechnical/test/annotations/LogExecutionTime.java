@@ -1,4 +1,4 @@
-package com.offretechnical.test.aop.annotation;
+package com.offretechnical.test.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

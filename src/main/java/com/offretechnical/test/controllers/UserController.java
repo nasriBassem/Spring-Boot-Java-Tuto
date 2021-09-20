@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.offretechnical.test.aop.annotation.LogExecutionTime;
-import com.offretechnical.test.daos.UserRepository;
+import com.offretechnical.test.annotations.LogExecutionTime;
 import com.offretechnical.test.models.User;
+import com.offretechnical.test.services.UserService;
 
 /**
  * Controller of the two requested services
@@ -34,7 +34,7 @@ public class UserController {
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	UserRepository userRepository;
+	UserService userService;
 
 	/**
 	 * getAllUsers
@@ -52,7 +52,7 @@ public class UserController {
 			/**
 			 * la récupération des
 			 */
-			userRepository.findAll().forEach(users::add);
+			userService.listAll().forEach(users::add);
 
 			/**
 			 * If null , reponse http 204
@@ -88,7 +88,7 @@ public class UserController {
 		/**
 		 * Enregistrement d'user
 		 */
-		User userCreated = userRepository.save(new User(user.getBirthdate(), user.getUserName(), user.getCountry(),
+		User userCreated = userService.save(new User(user.getBirthdate(), user.getUserName(), user.getCountry(),
 				user.getPhoneNumber(), user.getGender()));
 
 		/**
