@@ -15,7 +15,7 @@ import com.offretechnical.test.annotations.BirthDate;
 import com.offretechnical.test.annotations.Country;
 
 /**
- * Modéle des users
+ * User Model
  * 
  * @author bn
  *
@@ -131,7 +131,8 @@ public class User {
 	}
 
 	/**
-	 * Cosntructeur
+	 * 
+	 * User Builder
 	 * 
 	 * @param id
 	 * @param birthdate
@@ -159,7 +160,5 @@ public class User {
 		return "User [id=" + id + ", birthdate=" + birthdate + ", userName=" + userName + ", country=" + country
 				+ ", phoneNumber=" + phoneNumber + ", gender=" + gender + "]";
 	}
-	
-	
 
 }

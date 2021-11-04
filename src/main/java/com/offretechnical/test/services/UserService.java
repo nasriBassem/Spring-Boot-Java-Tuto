@@ -9,7 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.offretechnical.test.daos.UserRepository;
 import com.offretechnical.test.models.User;
-
+/**
+ * User Service
+ * 
+ * @author bn
+ *
+ */
 @Service
 @Transactional
 public class UserService {

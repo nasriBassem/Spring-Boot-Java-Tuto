@@ -37,7 +37,8 @@ public class UserController {
 	UserService userService;
 
 	/**
-	 * getAllUsers
+	 * List users
+	 * 
 	 * 
 	 * @return ResponseEntity<List<User>>
 	 */
@@ -46,11 +47,11 @@ public class UserController {
 	public ResponseEntity<List<User>> getAllUsers() {
 		try {
 			/**
-			 * La liste des users à retourner
+			 * The list of users to return
 			 */
 			List<User> users = new ArrayList<>();
 			/**
-			 * la récupération des
+			 * user recovery
 			 */
 			userService.listAll().forEach(users::add);
 
@@ -62,7 +63,7 @@ public class UserController {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 			/**
-			 * if liste pas vide , return la liste avec un code http 200
+			 * if the list is not empty, return the list with an http 200 code
 			 */
 			logger.info("Le nombre des users : {}", users.size());
 			return new ResponseEntity<>(users, HttpStatus.OK);
@@ -76,7 +77,8 @@ public class UserController {
 	}
 
 	/**
-	 * Création d'un user
+	 * 
+	 * Creation of a user
 	 * 
 	 * @param user
 	 * 
@@ -86,13 +88,13 @@ public class UserController {
 	@LogExecutionTime
 	public ResponseEntity<User> createUser(@Validated @RequestBody User user) {
 		/**
-		 * Enregistrement d'user
+		 * User registration
 		 */
 		User userCreated = userService.save(new User(user.getBirthdate(), user.getUserName(), user.getCountry(),
 				user.getPhoneNumber(), user.getGender()));
 
 		/**
-		 * Réponse HTTP 201 , user crée
+		 * Réponse HTTP 201 , user Created
 		 */
 		return new ResponseEntity<>(userCreated, HttpStatus.CREATED);
 	}

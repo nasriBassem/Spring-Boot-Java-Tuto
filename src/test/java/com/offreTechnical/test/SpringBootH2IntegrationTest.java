@@ -86,7 +86,7 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 	}
 
 	/**
-	 * create noy nammed user , and check return status
+	 * create not nammed user , and check return status
 	 * 
 	 * @throws Exception
 	 */

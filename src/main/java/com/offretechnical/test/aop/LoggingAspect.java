@@ -18,7 +18,7 @@ import org.springframework.util.StopWatch;
 import com.offretechnical.test.models.User;
 
 /**
- * Aop Logging input , output and Time Taken of services
+ * Aop Logging input , output and execution Time of services
  * 
  * @author bn
  *
@@ -29,7 +29,7 @@ public class LoggingAspect {
 	private static final Logger LOGGER = LogManager.getLogger(LoggingAspect.class);
 
 	/**
-	 * Service 's , return Value
+	 * Get the actual return value returned from the method "createUser()"
 	 * 
 	 * @param joinPoint
 	 * @param result
@@ -41,7 +41,7 @@ public class LoggingAspect {
 	}
 
 	/**
-	 * Service 's , return Value
+	 * Get the actual return value returned from the method "getAllUsers()"
 	 * 
 	 * @param joinPoint
 	 * @param result
@@ -53,7 +53,7 @@ public class LoggingAspect {
 	}
 
 	/**
-	 * Service 's , Input Data
+	 * Get the actual input data to the method "createUser()"
 	 * 
 	 * @param joinPoint
 	 */
@@ -64,7 +64,8 @@ public class LoggingAspect {
 	}
 
 	/**
-	 * method Time Logger
+	 * 
+	 * logs the execution time
 	 * 
 	 * @param proceedingJoinPoint
 	 * @throws Throwable
