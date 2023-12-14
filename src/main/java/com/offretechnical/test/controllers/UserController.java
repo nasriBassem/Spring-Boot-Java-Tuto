@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.offretechnical.test.annotations.LogExecutionTime;
 import com.offretechnical.test.models.User;
 import com.offretechnical.test.services.UserService;
 
@@ -43,7 +42,6 @@ public class UserController {
 	 * @return ResponseEntity<List<User>>
 	 */
 	@GetMapping("/users")
-	@LogExecutionTime
 	public ResponseEntity<List<User>> getAllUsers() {
 		try {
 			/**
@@ -85,7 +83,6 @@ public class UserController {
 	 * @return ResponseEntity<User>
 	 */
 	@PostMapping("/users")
-	@LogExecutionTime
 	public ResponseEntity<User> createUser(@Validated @RequestBody User user) {
 		/**
 		 * User registration

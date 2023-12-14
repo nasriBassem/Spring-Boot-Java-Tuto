@@ -130,9 +130,13 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(REST_URL).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
-
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(201, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		assertTrue(content.contains("country"));
+		assertTrue(content.contains("France"));
+		assertTrue(content.contains("userName"));
+
 	}
 
 }
