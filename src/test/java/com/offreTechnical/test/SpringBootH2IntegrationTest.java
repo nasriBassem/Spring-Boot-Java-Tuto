@@ -136,7 +136,6 @@ public class SpringBootH2IntegrationTest extends AbstractTest {
 		assertTrue(content.contains("country"));
 		assertTrue(content.contains("France"));
 		assertTrue(content.contains("userName"));
-
 	}
 
 }
